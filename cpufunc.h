@@ -6,8 +6,6 @@
 #include <driver_types.h>
 #include <cuda_runtime_api.h>
 
-#include <tira/cuda/error.h>
-
 // generate a random NxN matrix in host memory
 template<typename Type>
 Type* GenerateMatrix(size_t N, size_t M) {

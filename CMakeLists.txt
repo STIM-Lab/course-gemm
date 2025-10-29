@@ -8,7 +8,6 @@ project(matrix LANGUAGES CXX CUDA)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}")
 set(CMAKE_CXX_STANDARD 20)
 
-find_package(TIRA REQUIRED)
 find_package(CUDAToolkit REQUIRED)
 
 # I usually set a few parameters when building in Visual Studio since the defaults
@@ -40,7 +39,6 @@ endif ( MSVC )
 include_directories(
 			${CMAKE_CURRENT_BINARY_DIR}
 			${CMAKE_CURRENT_SOURCE_DIR}
-			${TIRA_INCLUDE_DIRS}
 )
 
 # Set the files required to build the executable

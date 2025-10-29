@@ -1,6 +1,14 @@
 #include <matrix.h>
 
-#include <tira/cuda/error.h>
+//handle error macro
+static void cuHandleError( const cudaError_t err, const char *file,  const int line ) {
+    if (err != cudaSuccess) {
+        printf("%s in %s at line %d\n", cudaGetErrorString( err ),  file, line );
+
+    }
+}
+#define HANDLE_ERROR( err ) (cuHandleError( err, __FILE__, __LINE__ ))
+
 /**
  * @brief CUDA kernel that performs a naive matrix multiplication, assuming that one thread is launched
  *          for each scalar value in the output matrix
