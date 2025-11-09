@@ -130,7 +130,12 @@ void gpuMultiply_Tile(Type* C, const Type* A, const Type* B, size_t M, size_t N,
     cudaMemcpy(gpu_B, B, K * N * sizeof(Type), cudaMemcpyHostToDevice);
 
     // The main difference in this code is that constants for the tile sizes are used to set the grid dimensions.
-    dim3 block_dim(TILE_M, TILE_N);
+    cudaDeviceProp prop;
+    HANDLE_ERROR(cudaGetDeviceProperties(&prop, 0));
+    int threads_per_block = prop.maxThreadsPerBlock;
+    int sqrt_threads_per_block = std::sqrt(threads_per_block);
+    dim3 block_dim(sqrt_threads_per_block, sqrt_threads_per_block);
+    
     dim3 grid_dim(M / block_dim.x + 1, N / block_dim.y + 1);
 
     // Launch the tiled kernel with the specified grid parameters
