@@ -15,7 +15,7 @@
 #define TILE_K 32
 typedef float TestType;
 static bool CPU = false;
-#define SIZE_APPROX 5000
+#define SIZE_APPROX 400
 
 /**
  * Everything below this point are declarations that shouldn't be changed unless you know what you're doing

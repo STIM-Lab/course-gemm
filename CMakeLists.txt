@@ -35,6 +35,8 @@ else()
 endif ( MSVC )
 
 
+
+
 # Set all of the include directories so that you can include the necessary header files
 include_directories(
 			${CMAKE_CURRENT_BINARY_DIR}
@@ -54,3 +56,15 @@ add_executable(matrix
 target_link_libraries(matrix
 		CUDA::cublas
 )
+
+set_target_properties(matrix
+		PROPERTIES
+		CUDA_SEPARABLE_COMPILATION ON
+		CUDA_RESOLVE_DEVICE_SYMBOLS ON
+)
+
+target_compile_options(matrix PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:
+		--generate-line-info
+		--use_fast_math
+		--relocatable-device-code=true
+		>)
